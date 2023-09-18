@@ -1,13 +1,9 @@
 # 🚚 물류 시스템
 
----
-
 #### 대리점, 제품, 입 / 출고 등 물류의 기본 기능을 갖춘 시스템 구현
 <br/>
 
 ## 프로젝트 기능 및 설계
-
----
 
 #### 인증 / 인가 기능
 - 관리자 / 대리점 계정 생성
@@ -64,23 +60,21 @@
 
 <img src="table/logistics_erd.png" alt="ERD 이미지">
 
----
 
 <br/>
 
 ## API 문서
 
----
 
 <i>스웨거 문서 업데이트 예정</i>
 <br/><br/>
 
 ## Tech Stack
 
----
-
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="JAVA" />
-<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="SPRING BOOT" />
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MYSQL" />
+<div>
+  <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="JAVA" />
+  <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="SPRING BOOT" />
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MYSQL" />
+</div>
 
 <br/><br/>
