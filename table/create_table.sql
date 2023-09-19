@@ -47,7 +47,6 @@ CREATE TABLE product
     unit             INT            NOT NULL,
     box_supply_price INT            NOT NULL,
     box_vat          DECIMAL(10, 1) NOT NULL,
-    pallet_capacity  INT            NOT NULL,
     description      VARCHAR(3000),
     created_at       DATETIME       NOT NULL,
     modified_at      DATETIME
