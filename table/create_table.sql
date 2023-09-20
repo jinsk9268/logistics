@@ -54,23 +54,25 @@ CREATE TABLE product
 
 CREATE TABLE product_stock
 (
-    product_code VARCHAR(30) PRIMARY KEY,
-    quantity     INT      NOT NULL,
-    created_at   DATETIME NOT NULL,
-    modified_at  DATETIME,
+    product_code  VARCHAR(30) PRIMARY KEY,
+    box_quantity  INT      NOT NULL,
+    unit_quantity INT      NOT NULL,
+    created_at    DATETIME NOT NULL,
+    modified_at   DATETIME,
 
     FOREIGN KEY (product_code) REFERENCES product (code)
 );
 
 CREATE TABLE product_stock_transaction
 (
-    id           BIGINT AUTO_INCREMENT PRIMARY KEY,
-    product_code VARCHAR(30) NOT NULL,
-    stock_change VARCHAR(30) NOT NULL,
-    quantity     INT         NOT NULL,
-    notes        VARCHAR(3000),
-    created_at   DATETIME    NOT NULL,
-    modified_at  DATETIME,
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    product_code  VARCHAR(30) NOT NULL,
+    stock_change  VARCHAR(30) NOT NULL,
+    box_quantity  INT         NOT NULL,
+    unit_quantity INT         NOT NULL,
+    notes         VARCHAR(3000),
+    created_at    DATETIME    NOT NULL,
+    modified_at   DATETIME,
 
     FOREIGN KEY (product_code) REFERENCES product (code)
 );
