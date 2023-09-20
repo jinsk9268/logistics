@@ -1,8 +1,8 @@
 CREATE TABLE admin
 (
     code        VARCHAR(30) PRIMARY KEY,
-    name        VARCHAR(30)  NOT NULL,
     password    VARCHAR(100) NOT NULL,
+    name        VARCHAR(30)  NOT NULL,
     email       VARCHAR(100) NOT NULL,
     mobile      VARCHAR(11)  NOT NULL,
     created_at  DATETIME     NOT NULL,
