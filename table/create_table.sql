@@ -81,7 +81,7 @@ CREATE TABLE orders
 (
     id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
     agency_code         VARCHAR(30)    NOT NULL,
-    order_type          VARCHAR(30)    NOT NULL DEFAULT 'common',
+    order_type          VARCHAR(30)    NOT NULL DEFAULT 'GENERAL',
     order_date          DATE           NOT NULL,
     shipping_date       DATE           NOT NULL,
     total_box_quantity  INT            NOT NULL,
