@@ -28,13 +28,13 @@ CREATE TABLE agency
 
 CREATE TABLE agency_credit_transaction
 (
-    id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
-    agency_code        VARCHAR(30) NOT NULL,
-    credit_change      BIGINT      NOT NULL,
-    credit_change_type VARCHAR(50) NOT NULL -- DEPOSIT, WITHDRAWAL, ORDER, ADJUSTMENT, RETURN
-    notes              VARCHAR(3000),
-    created_at         DATETIME    NOT NULL,
-    modified_at        DATETIME,
+    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+    agency_code   VARCHAR(30) NOT NULL,
+    change_amount BIGINT      NOT NULL,
+    change_type   VARCHAR(50) NOT NULL, -- DEPOSIT, WITHDRAWAL, ORDER, ADJUSTMENT, RETURN
+    notes         VARCHAR(3000),
+    created_at    DATETIME    NOT NULL,
+    modified_at   DATETIME,
 
     FOREIGN KEY (agency_code) REFERENCES agency (code)
 );
@@ -43,10 +43,10 @@ CREATE TABLE product
 (
     code             VARCHAR(30) PRIMARY KEY,
     product_name     VARCHAR(30)    NOT NULL,
-    tax_exempt       TINYINT(1)     NOT NULL,
+    tax_exempt       TINYINT(1) NOT NULL,
     supply_price     INT            NOT NULL,
     vat              DECIMAL(10, 1) NOT NULL,
-    unit             INT            NOT NULL,
+    quantity_per_box INT            NOT NULL,
     box_supply_price INT            NOT NULL,
     box_vat          DECIMAL(10, 1) NOT NULL,
     description      VARCHAR(3000),
@@ -56,45 +56,45 @@ CREATE TABLE product
 
 CREATE TABLE product_stock
 (
-    product_code  VARCHAR(30) PRIMARY KEY,
-    box_quantity  INT      NOT NULL,
-    unit_quantity INT      NOT NULL,
-    created_at    DATETIME NOT NULL,
-    modified_at   DATETIME,
+    product_code VARCHAR(30) PRIMARY KEY,
+    stock_boxes  INT      NOT NULL,
+    stock_units  INT      NOT NULL,
+    created_at   DATETIME NOT NULL,
+    modified_at  DATETIME,
 
     FOREIGN KEY (product_code) REFERENCES product (code)
 );
 
 CREATE TABLE product_stock_transaction
 (
-    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
-    product_code  VARCHAR(30) NOT NULL,
-    stock_change  VARCHAR(50) NOT NULL,
-    box_quantity  INT         NOT NULL,
-    unit_quantity INT         NOT NULL,
-    notes         VARCHAR(3000),
-    created_at    DATETIME    NOT NULL,
-    modified_at   DATETIME,
+    id           BIGINT AUTO_INCREMENT PRIMARY KEY,
+    product_code VARCHAR(30) NOT NULL,
+    stock_boxes  INT         NOT NULL,
+    stock_units  INT         NOT NULL,
+    change_type  VARCHAR(50) NOT NULL,
+    notes        VARCHAR(3000),
+    created_at   DATETIME    NOT NULL,
+    modified_at  DATETIME,
 
     FOREIGN KEY (product_code) REFERENCES product (code)
 );
 
 CREATE TABLE orders
 (
-    id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
-    agency_code         VARCHAR(30)    NOT NULL,
-    order_type          VARCHAR(50)    NOT NULL DEFAULT 'GENERAL', -- GENERAL, DIRECT, SELF, RETURN
-    order_date          DATE           NOT NULL,
-    shipping_date       DATE           NOT NULL,
-    total_box_quantity  INT            NOT NULL,
-    total_unit_quantity INT            NOT NULL,
-    total_supply_price  BIGINT         NOT NULL,
-    total_vat           DECIMAL(10, 1) NOT NULL,
-    total_amount        BIGINT         NOT NULL,
-    order_status        VARCHAR(50)    NOT NULL DEFAULT 'PENDING', -- PENDING, CONFIRMED, DISPATCHED, SHIPPING_COMPLETED, CANCELLED, RETURN
-    notes               VARCHAR(3000),
-    created_at          DATETIME       NOT NULL,
-    modified_at         DATETIME,
+    id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
+    agency_code        VARCHAR(30)    NOT NULL,
+    order_type         VARCHAR(50)    NOT NULL DEFAULT 'GENERAL', -- GENERAL, DIRECT, SELF, RETURN
+    order_date         DATE           NOT NULL,
+    shipping_date      DATE           NOT NULL,
+    total_boxes        INT            NOT NULL,
+    total_units        INT            NOT NULL,
+    total_supply_price BIGINT         NOT NULL,
+    total_vat          DECIMAL(10, 1) NOT NULL,
+    total_amount       BIGINT         NOT NULL,
+    order_status       VARCHAR(50)    NOT NULL DEFAULT 'PENDING', -- PENDING, CONFIRMED, DISPATCHED, SHIPPING_COMPLETED, CANCELLED, RETURN
+    notes              VARCHAR(3000),
+    created_at         DATETIME       NOT NULL,
+    modified_at        DATETIME,
 
     FOREIGN KEY (agency_code) REFERENCES agency (code)
 );
@@ -103,11 +103,11 @@ CREATE TABLE order_detail
 (
     order_id             BIGINT,
     product_code         VARCHAR(30),
-    box_quantity         INT            NOT NULL,
-    unit_quantity        INT            NOT NULL,
+    product_boxes        INT            NOT NULL,
+    product_units        INT            NOT NULL,
     product_supply_price BIGINT         NOT NULL,
     product_vat          DECIMAL(10, 1) NOT NULL,
-    product_total_amount BIGINT         NOT NULL,
+    product_amount       BIGINT         NOT NULL,
     created_at           DATETIME       NOT NULL,
     modified_at          DATETIME,
 
@@ -121,8 +121,8 @@ CREATE TABLE shipping
     id                     BIGINT AUTO_INCREMENT PRIMARY KEY,
     order_id               BIGINT         NOT NULL,
     shipping_complete_date DATE           NOT NULL,
-    total_box_quantity     INT            NOT NULL,
-    total_unit_quantity    INT            NOT NULL,
+    total_boxes            INT            NOT NULL,
+    total_units            INT            NOT NULL,
     total_supply_price     BIGINT         NOT NULL,
     total_vat              DECIMAL(10, 1) NOT NULL,
     total_amount           BIGINT         NOT NULL,
@@ -137,11 +137,11 @@ CREATE TABLE shipping_detail
 (
     shipping_id          BIGINT,
     product_code         VARCHAR(30),
-    box_quantity         INT            NOT NULL,
-    unit_quantity        INT            NOT NULL,
+    product_boxes        INT            NOT NULL,
+    product_units        INT            NOT NULL,
     product_supply_price BIGINT         NOT NULL,
     product_vat          DECIMAL(10, 1) NOT NULL,
-    product_total_amount BIGINT         NOT NULL,
+    product_amount       BIGINT         NOT NULL,
     created_at           DATETIME       NOT NULL,
     modified_at          DATETIME,
 
