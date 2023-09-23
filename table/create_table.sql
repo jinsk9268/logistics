@@ -28,12 +28,13 @@ CREATE TABLE agency
 
 CREATE TABLE agency_credit_transaction
 (
-    id            BIGINT AUTO_INCREMENT PRIMARY KEY,
-    agency_code   VARCHAR(30) NOT NULL,
-    credit_change BIGINT      NOT NULL,
-    notes         VARCHAR(3000),
-    created_at    DATETIME    NOT NULL,
-    modified_at   DATETIME,
+    id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
+    agency_code        VARCHAR(30) NOT NULL,
+    credit_change      BIGINT      NOT NULL,
+    credit_change_type VARCHAR(50) NOT NULL -- DEPOSIT, WITHDRAWAL, ORDER, ADJUSTMENT, RETURN
+    notes              VARCHAR(3000),
+    created_at         DATETIME    NOT NULL,
+    modified_at        DATETIME,
 
     FOREIGN KEY (agency_code) REFERENCES agency (code)
 );
@@ -68,7 +69,7 @@ CREATE TABLE product_stock_transaction
 (
     id            BIGINT AUTO_INCREMENT PRIMARY KEY,
     product_code  VARCHAR(30) NOT NULL,
-    stock_change  VARCHAR(30) NOT NULL,
+    stock_change  VARCHAR(50) NOT NULL,
     box_quantity  INT         NOT NULL,
     unit_quantity INT         NOT NULL,
     notes         VARCHAR(3000),
@@ -82,7 +83,7 @@ CREATE TABLE orders
 (
     id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
     agency_code         VARCHAR(30)    NOT NULL,
-    order_type          VARCHAR(30)    NOT NULL DEFAULT 'GENERAL',
+    order_type          VARCHAR(50)    NOT NULL DEFAULT 'GENERAL', -- GENERAL, DIRECT, SELF, RETURN
     order_date          DATE           NOT NULL,
     shipping_date       DATE           NOT NULL,
     total_box_quantity  INT            NOT NULL,
@@ -90,7 +91,7 @@ CREATE TABLE orders
     total_supply_price  BIGINT         NOT NULL,
     total_vat           DECIMAL(10, 1) NOT NULL,
     total_amount        BIGINT         NOT NULL,
-    order_status        VARCHAR(30)    NOT NULL DEFAULT 'PENDING',
+    order_status        VARCHAR(50)    NOT NULL DEFAULT 'PENDING', -- PENDING, CONFIRMED, DISPATCHED, SHIPPING_COMPLETED, CANCELLED, RETURN
     notes               VARCHAR(3000),
     created_at          DATETIME       NOT NULL,
     modified_at         DATETIME,
