@@ -30,8 +30,8 @@ CREATE TABLE agency_credit_transaction
 (
     id            BIGINT AUTO_INCREMENT PRIMARY KEY,
     agency_code   VARCHAR(30) NOT NULL,
-    change_amount BIGINT      NOT NULL,
-    change_type   VARCHAR(50) NOT NULL, -- DEPOSIT, WITHDRAWAL, ORDER, ADJUSTMENT, RETURN
+    credit_amount BIGINT      NOT NULL,
+    credit_change VARCHAR(50) NOT NULL, -- DEPOSIT, WITHDRAWAL, ORDER, ADJUSTMENT, RETURN
     notes         VARCHAR(3000),
     created_at    DATETIME    NOT NULL,
     modified_at   DATETIME,
@@ -43,7 +43,7 @@ CREATE TABLE product
 (
     code             VARCHAR(30) PRIMARY KEY,
     product_name     VARCHAR(30)    NOT NULL,
-    tax_exempt       TINYINT(1) NOT NULL,
+    tax_exempt       TINYINT(1)     NOT NULL,
     supply_price     INT            NOT NULL,
     vat              DECIMAL(10, 1) NOT NULL,
     quantity_per_box INT            NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE product_stock_transaction
     product_code VARCHAR(30) NOT NULL,
     stock_boxes  INT         NOT NULL,
     stock_units  INT         NOT NULL,
-    change_type  VARCHAR(50) NOT NULL,
+    stock_change  VARCHAR(50) NOT NULL,
     notes        VARCHAR(3000),
     created_at   DATETIME    NOT NULL,
     modified_at  DATETIME,
