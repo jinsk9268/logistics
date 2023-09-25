@@ -71,7 +71,7 @@ CREATE TABLE product_stock_transaction
     product_code VARCHAR(30) NOT NULL,
     stock_boxes  INT         NOT NULL,
     stock_units  INT         NOT NULL,
-    stock_change  VARCHAR(50) NOT NULL,
+    stock_change VARCHAR(50) NOT NULL,
     notes        VARCHAR(3000),
     created_at   DATETIME    NOT NULL,
     modified_at  DATETIME,
@@ -86,12 +86,12 @@ CREATE TABLE orders
     order_type         VARCHAR(50)    NOT NULL DEFAULT 'GENERAL', -- GENERAL, DIRECT, SELF, RETURN
     order_date         DATE           NOT NULL,
     shipping_date      DATE           NOT NULL,
+    order_status       VARCHAR(50)    NOT NULL DEFAULT 'PENDING', -- PENDING, CONFIRMED, DISPATCHED, SHIPPING_COMPLETED, CANCELLED, RETURN
     total_boxes        INT            NOT NULL,
     total_units        INT            NOT NULL,
     total_supply_price BIGINT         NOT NULL,
     total_vat          DECIMAL(10, 1) NOT NULL,
     total_amount       BIGINT         NOT NULL,
-    order_status       VARCHAR(50)    NOT NULL DEFAULT 'PENDING', -- PENDING, CONFIRMED, DISPATCHED, SHIPPING_COMPLETED, CANCELLED, RETURN
     notes              VARCHAR(3000),
     created_at         DATETIME       NOT NULL,
     modified_at        DATETIME,
